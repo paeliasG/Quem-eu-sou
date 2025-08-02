@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Quem Sou Eu Eclesia</title>
-  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Bangers&family=Roboto&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Roboto&display=swap" rel="stylesheet" />
   <style>
     :root {
       --laranja: #D84315;
@@ -26,39 +26,46 @@
       background-image: url('background_menu.jpg');
       background-size: cover;
       background-position: center;
-      user-select: none;
     }
     #menuScreen {
       display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 1rem;
-      max-width: 720px;
-      padding: 1rem;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      width: 100vw;
+      height: 100vh;
+      padding: 2rem 1rem 1rem;
+      box-sizing: border-box;
+      gap: 1.5rem;
     }
-    .menu {
-      width: 100%;
+    .menu-title {
       font-family: 'Bangers', cursive;
-      font-size: 3rem;
+      font-size: 4rem;
       color: var(--laranja);
       text-shadow: 2px 2px 5px #000;
-      text-align: center;
-      margin-bottom: 2rem;
       user-select: none;
+      margin-bottom: 1rem;
+      text-align: center;
+      width: 100%;
+    }
+    .themes-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem 1rem;
+      width: 90vw;
+      max-width: 360px;
     }
     .theme-button {
       background-color: var(--laranja);
       color: var(--preto);
       border: none;
       border-radius: 10px;
-      padding: 1rem 1.5rem;
+      padding: 1rem 0;
       font-size: 1.3rem;
       cursor: pointer;
       transition: 0.2s;
-      flex: 1 1 150px;
-      text-align: center;
+      width: 100%;
       user-select: none;
-      box-shadow: 0 3px 6px rgba(0,0,0,0.4);
     }
     .theme-button:hover {
       background-color: #e64a19;
@@ -68,86 +75,85 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      text-align: center;
-      padding: 1rem;
-      max-width: 600px;
+      width: 100vw;
       height: 100vh;
+      padding: 1rem 2rem;
       box-sizing: border-box;
+      text-align: center;
+      cursor: pointer;
       user-select: none;
     }
     .character-name {
-      font-family: 'Press Start 2P', cursive;
-      font-size: 6vw;
+      font-family: 'Bangers', cursive;
+      font-size: 3.5rem;
       color: var(--laranja);
-      margin: 3rem 0 1rem;
+      margin: 2rem 0 1rem;
       user-select: none;
-      text-shadow: 3px 3px 7px #000;
-      letter-spacing: 2px;
-      line-height: 1.1;
     }
     .character-desc {
-      font-size: 1.2rem;
+      font-size: 1.5rem;
       background-color: rgba(0,0,0,0.7);
       padding: 1rem 1.5rem;
-      border-radius: 8px;
+      border-radius: 15px;
       color: var(--cinza-claro);
       max-width: 90vw;
-      margin-bottom: 2rem;
       line-height: 1.4;
+      display: inline-block;
+      margin-bottom: 4rem;
+      word-wrap: break-word;
       user-select: none;
-    }
-    #characterImg {
-      width: 180px;
-      height: 180px;
-      margin-top: 1rem;
-      filter: drop-shadow(2px 2px 2px #000);
-      border-radius: 15px;
-      object-fit: cover;
-      background: var(--laranja);
-      user-select: none;
-      display: none; /* Oculto por padrão */
     }
     #backButton {
-      margin-top: 1rem;
       background: none;
       border: none;
       color: var(--laranja);
       cursor: pointer;
-      font-size: 1rem;
+      font-size: 1.2rem;
+      position: fixed;
+      bottom: 1.5rem;
       user-select: none;
-      text-decoration: none;
+      transition: color 0.3s;
+      user-select: none;
     }
     #backButton:hover {
+      color: #e64a19;
       text-decoration: underline;
     }
     .footer {
-      position: absolute;
-      bottom: 1rem;
+      position: fixed;
+      bottom: 0.3rem;
       font-size: 0.9rem;
       color: var(--cinza-claro);
       user-select: none;
+      width: 100%;
+      text-align: center;
+      font-family: 'Roboto', sans-serif;
     }
   </style>
 </head>
 <body>
   <div id="menuScreen">
-    <div class="menu">Quem Sou Eu Eclesia</div>
-    <button class="theme-button" onclick="startGame('todos')">Modo Completo</button>
-    <button class="theme-button" onclick="startGame('antigo')">Antigo Testamento</button>
-    <button class="theme-button" onclick="startGame('novo')">Novo Testamento</button>
-    <button class="theme-button" onclick="startGame('discipulos')">Discípulos</button>
-    <button class="theme-button" onclick="startGame('profetas')">Profetas</button>
-    <button class="theme-button" onclick="startGame('mulheres')">Mulheres</button>
-    <button class="theme-button" onclick="startGame('reis')">Reis de Israel</button>
-    <button class="theme-button" onclick="startGame('juizes')">Juízes</button>
+    <div class="menu-title">Quem Sou Eu Eclesia</div>
+    <div class="themes-grid">
+      <button class="theme-button" onclick="startGame('todos')">Modo Completo</button>
+      <button class="theme-button" onclick="startGame('antigo')">Antigo Testamento</button>
+      <button class="theme-button" onclick="startGame('novo')">Novo Testamento</button>
+      <button class="theme-button" onclick="startGame('discipulos')">Discípulos</button>
+      <button class="theme-button" onclick="startGame('profetas')">Profetas</button>
+      <button class="theme-button" onclick="startGame('mulheres')">Mulheres</button>
+      <button class="theme-button" onclick="startGame('reis')">Reis de Israel</button>
+      <button class="theme-button" onclick="startGame('juizes')">Juízes</button>
+    </div>
   </div>
+
   <div id="gameScreen" onclick="showNextCharacter()">
     <div class="character-name" id="characterName"></div>
     <div class="character-desc" id="characterDesc"></div>
-    <img id="characterImg" alt="Imagem do personagem" />
     <button id="backButton" onclick="backToMenu(event)">← Voltar ao Menu</button>
   </div>
+
   <div class="footer">Feito por Jonas feat. Eclesia</div>
+
   <audio id="clickSound" src="https://actions.google.com/sounds/v1/cartoon/wood_plank_flicks.ogg"></audio>
 
   <script>
@@ -162,64 +168,56 @@
         {name:"Salomão", desc:"Rei sábio, filho de Davi."},
         {name:"Isaías", desc:"Profeta messiânico."},
         {name:"Jeremias", desc:"Profeta do lamento."},
+        {name:"Ezequiel", desc:"Profeta no exílio."},
+        {name:"Daniel", desc:"Interpretou sonhos e sobreviveu à cova dos leões."},
         {name:"Jesus", desc:"Filho de Deus, Salvador."},
         {name:"Maria", desc:"Mãe de Jesus."},
         {name:"Pedro", desc:"Apóstolo e líder da igreja primitiva."},
         {name:"Paulo", desc:"Missionário dos gentios."},
+        {name:"João Batista", desc:"Preparou o caminho para Jesus."},
         {name:"Maria Madalena", desc:"Seguidora fiel de Jesus."},
-        {name:"Sansão", desc:"Juiz forte, lutou contra filisteus."},
-        {name:"Rute", desc:"Moabita fiel, ancestral de Davi."},
-        {name:"Elias", desc:"Profeta que subiu ao céu em carro de fogo."},
-        {name:"Eliseu", desc:"Sucessor de Elias, fez milagres."},
-        {name:"Josué", desc:"Sucessor de Moisés, conquistou Canaã."},
-        {name:"Tiago", desc:"Irmão de Jesus e líder da igreja em Jerusalém."}
+        {name:"Judas Iscariotes", desc:"Traidor de Jesus."},
       ],
       antigo: [
-        {name:"Abel", desc:"Filho de Adão e Eva, assassinado por Caim."},
-        {name:"Caim", desc:"Filho de Adão e Eva, matou seu irmão Abel."},
-        {name:"Enoque", desc:"Andou com Deus e foi levado sem morrer."},
-        {name:"Balaão", desc:"Profeta contratado para amaldiçoar Israel."},
-        {name:"Jael", desc:"Matou Sísera para salvar Israel."},
-        {name:"Efraim", desc:"Filho de José, patriarca de uma tribo."},
-        {name:"Manassés", desc:"Filho de José, patriarca de uma tribo."},
-        {name:"Jonatã", desc:"Amigo fiel de Davi, filho de Saul."},
-        {name:"Absalão", desc:"Filho rebelde de Davi."},
-        {name:"Natã", desc:"Profeta que repreendeu Davi."},
-        {name:"Goliat", desc:"Gigante filisteu derrotado por Davi."},
-        {name:"Uria", desc:"Marido de Bate-Seba, soldado de Davi."},
-        {name:"Bate-Seba", desc:"Esposa de Urias, depois de Davi."},
-        {name:"Ezequias", desc:"Rei fiel a Deus em Judá."},
-        {name:"Manassés (rei)", desc:"Rei que se arrependeu."},
-        {name:"Josias", desc:"Rei que restaurou a lei em Judá."},
-        {name:"Neemias", desc:"Liderou a reconstrução dos muros de Jerusalém."},
-        {name:"Esdras", desc:"Sacerdote e escriba que restaurou a lei."},
-        {name:"Zorobabel", desc:"Governador que liderou o retorno do exílio."}
+        {name:"Adão", desc:"Primeiro homem criado por Deus."},
+        {name:"Eva", desc:"Primeira mulher, criada de Adão."},
+        {name:"Noé", desc:"Construiu a arca e sobreviveu ao dilúvio."},
+        {name:"Abraão", desc:"Pai da fé e das nações."},
+        {name:"Moisés", desc:"Liderou o Êxodo do Egito."},
+        {name:"Davi", desc:"Homem segundo o coração de Deus."},
+        {name:"Salomão", desc:"Rei sábio, filho de Davi."},
+        {name:"Isaías", desc:"Profeta messiânico."},
+        {name:"Jeremias", desc:"Profeta do lamento."},
+        {name:"Ezequiel", desc:"Profeta no exílio."},
+        {name:"Daniel", desc:"Interpretou sonhos e sobreviveu à cova dos leões."},
+        {name:"Sansão", desc:"Juiz forte, lutou contra filisteus."},
+        {name:"Samuel", desc:"Último juiz e profeta."},
+        {name:"Rute", desc:"Moabita fiel, ancestral de Davi."},
       ],
       novo: [
-        {name:"André", desc:"Irmão de Pedro e apóstolo."},
-        {name:"Judas Tadeu", desc:"Apóstolo, também chamado de Tadeu."},
-        {name:"Marcos", desc:"Autor do Evangelho de Marcos."},
-        {name:"Lucas", desc:"Autor do Evangelho de Lucas e Atos."},
-        {name:"Timóteo", desc:"Companheiro de Paulo."},
-        {name:"Tito", desc:"Colaborador de Paulo."},
-        {name:"Apolo", desc:"Pregador eloquente."},
-        {name:"Filipe, o evangelista", desc:"Um dos sete escolhidos para servir."},
-        {name:"Nicodemos", desc:"Fariseu que visitou Jesus à noite."},
-        {name:"José de Arimateia", desc:"Enterrou Jesus."},
-        {name:"Barrabás", desc:"Preso libertado no lugar de Jesus."},
-        {name:"Ananias", desc:"Casado com Safira, mentiu ao Espírito."},
-        {name:"Safira", desc:"Casada com Ananias."},
-        {name:"Marta", desc:"Irmã de Maria e Lázaro."},
-        {name:"Maria de Betânia", desc:"Irmã de Marta e Lázaro."}
-      ],
-      discipulos: [
-        {name:"Tiago, filho de Alfeu", desc:"Apóstolo."},
+        {name:"Jesus", desc:"Filho de Deus, Salvador."},
+        {name:"Maria", desc:"Mãe de Jesus."},
+        {name:"Pedro", desc:"Apóstolo e líder da igreja primitiva."},
+        {name:"João Batista", desc:"Preparou o caminho para Jesus."},
+        {name:"Paulo", desc:"Missionário dos gentios."},
+        {name:"Maria Madalena", desc:"Seguidora fiel de Jesus."},
+        {name:"Judas Iscariotes", desc:"Traidor de Jesus."},
+        {name:"Tiago", desc:"Irmão de Jesus, líder da igreja em Jerusalém."},
         {name:"Tomé", desc:"Apóstolo que duvidou até ver Jesus."},
         {name:"Mateus", desc:"Cobrador de impostos, evangelista."},
+      ],
+      discipulos: [
+        {name:"Pedro", desc:"Apóstolo e líder da igreja primitiva."},
+        {name:"João", desc:"Discípulo amado, apóstolo."},
+        {name:"Tiago, filho de Zebedeu", desc:"Apóstolo."},
+        {name:"André", desc:"Irmão de Pedro e apóstolo."},
+        {name:"Filipe", desc:"Apóstolo e evangelista."},
         {name:"Bartolomeu", desc:"Apóstolo."},
+        {name:"Tomé", desc:"Apóstolo que duvidou até ver Jesus."},
+        {name:"Mateus", desc:"Cobrador de impostos, evangelista."},
+        {name:"Tiago, filho de Alfeu", desc:"Apóstolo."},
         {name:"Simão, o Zelote", desc:"Apóstolo."},
-        {name:"Matias", desc:"Escolhido para substituir Judas."},
-        {name:"Filipe", desc:"Apóstolo e evangelista."}
+        {name:"Judas Tadeu", desc:"Apóstolo, também chamado de Tadeu."},
       ],
       profetas: [
         {name:"Isaías", desc:"Profeta messiânico."},
@@ -229,96 +227,90 @@
         {name:"Oseias", desc:"Profeta do amor de Deus."},
         {name:"Joel", desc:"Profeta do derramamento do Espírito."},
         {name:"Amós", desc:"Profeta da justiça social."},
-        {name:"Obadias", desc:"Profeta contra Edom."},
         {name:"Jonas", desc:"Profeta enviado a Nínive."},
         {name:"Miquéias", desc:"Profeta da justiça."},
         {name:"Naum", desc:"Profeta contra Nínive."},
-        {name:"Habacuque", desc:"Profeta da fé."},
-        {name:"Sofonias", desc:"Profeta do juízo."},
-        {name:"Ageu", desc:"Profeta da reconstrução."},
-        {name:"Zacarias", desc:"Profeta messiânico."},
-        {name:"Malaquias", desc:"Último profeta do AT."}
       ],
       mulheres: [
-        {name:"Ana (profetisa)", desc:"Profetisa no templo."},
+        {name:"Eva", desc:"Primeira mulher, criada de Adão."},
         {name:"Sara", desc:"Esposa de Abraão."},
-        {name:"Rebeca", desc:"Esposa de Isaque."},
         {name:"Raquel", desc:"Esposa amada de Jacó."},
-        {name:"Lea", desc:"Esposa de Jacó."},
+        {name:"Débora", desc:"Juíza e profetisa."},
+        {name:"Rute", desc:"Moabita fiel, ancestral de Davi."},
+        {name:"Ana (profetisa)", desc:"Profetisa no templo."},
         {name:"Maria", desc:"Mãe de Jesus."},
         {name:"Maria Madalena", desc:"Seguidora fiel de Jesus."},
+        {name:"Marta", desc:"Irmã de Maria e Lázaro."},
         {name:"Joana", desc:"Seguidora de Jesus."},
-        {name:"Lídia", desc:"Primeira convertida na Europa."},
-        {name:"Priscila", desc:"Colaboradora de Paulo."},
-        {name:"Febe", desc:"Diaconisa da igreja."},
-        {name:"Bate-Seba", desc:"Esposa de Urias, depois de Davi."}
       ],
       reis: [
-        {name:"Reoboão", desc:"Filho de Salomão, rei de Judá."},
-        {name:"Jeroboão", desc:"Primeiro rei do reino do Norte."},
-        {name:"Oseias", desc:"Último rei de Israel."},
-        {name:"Acaz", desc:"Rei de Judá."},
-        {name:"Ezequias", desc:"Rei fiel de Judá."},
+        {name:"Saul", desc:"Primeiro rei de Israel."},
+        {name:"Davi", desc:"Homem segundo o coração de Deus."},
+        {name:"Salomão", desc:"Rei sábio, filho de Davi."},
+        {name:"Ezequias", desc:"Rei fiel a Deus em Judá."},
         {name:"Manassés (rei)", desc:"Rei que se arrependeu."},
-        {name:"Josias", desc:"Rei que restaurou a lei em Judá."}
+        {name:"Josias", desc:"Rei que restaurou a lei em Judá."},
+        {name:"Jeroboão", desc:"Primeiro rei do reino do Norte."},
       ],
       juizes: [
-        {name:"Eúde", desc:"Juiz que libertou Israel dos moabitas."},
-        {name:"Tola", desc:"Juiz que governou Israel por 23 anos."},
+        {name:"Débora", desc:"Juíza e profetisa."},
+        {name:"Gideão", desc:"Juiz que derrotou os midianitas."},
+        {name:"Sansão", desc:"Juiz forte, lutou contra filisteus."},
         {name:"Jefté", desc:"Juiz que venceu os amonitas."},
-        {name:"Ibzã", desc:"Juiz em Israel."},
-        {name:"Elom", desc:"Juiz em Israel."},
-        {name:"Abdom", desc:"Juiz em Israel."}
-      ]
+        {name:"Eúde", desc:"Juiz que libertou Israel dos moabitas."},
+      ],
     };
 
     let currentTheme = '';
     let currentIndex = 0;
 
+    const menuScreen = document.getElementById('menuScreen');
+    const gameScreen = document.getElementById('gameScreen');
+    const characterName = document.getElementById('characterName');
+    const characterDesc = document.getElementById('characterDesc');
+    const clickSound = document.getElementById('clickSound');
+    const backButton = document.getElementById('backButton');
+
     function startGame(theme) {
       currentTheme = theme;
       currentIndex = 0;
-      document.getElementById('menuScreen').style.display = 'flex' ? 'none' : 'none'; // garanto o hide
-      document.getElementById('menuScreen').style.display = 'none';
-      document.getElementById('gameScreen').style.display = 'flex';
+      menuScreen.style.display = 'none';
+      gameScreen.style.display = 'flex';
       showCharacter();
     }
 
     function showCharacter() {
-      const character = characters[currentTheme][currentIndex];
-      const nameEl = document.getElementById('characterName');
-      const descEl = document.getElementById('characterDesc');
-      const imgEl = document.getElementById('characterImg');
-      const clickSound = document.getElementById('clickSound');
-
-      if(character) {
-        nameEl.textContent = character.name;
-        descEl.textContent = character.desc;
-        if(character.img) {
-          imgEl.src = character.img;
-          imgEl.style.display = 'block';
-        } else {
-          imgEl.style.display = 'none';
-          imgEl.removeAttribute('src');
-        }
+      const list = characters[currentTheme];
+      if (!list || list.length === 0) {
+        characterName.textContent = 'Nenhum personagem encontrado.';
+        characterDesc.textContent = '';
+        return;
       }
-      clickSound.currentTime = 0;
-      clickSound.play();
+      const char = list[currentIndex];
+      characterName.textContent = char.name;
+      characterDesc.textContent = char.desc;
     }
 
     function showNextCharacter() {
+      clickSound.currentTime = 0;
+      clickSound.play();
+
+      const list = characters[currentTheme];
+      if (!list) return;
+
       currentIndex++;
-      if(currentIndex >= characters[currentTheme].length) {
-        backToMenu();
-      } else {
-        showCharacter();
+      if (currentIndex >= list.length) {
+        currentIndex = 0;
       }
+      showCharacter();
     }
 
     function backToMenu(event) {
-      if(event) event.stopPropagation(); // evita disparar click do gameScreen junto
-      document.getElementById('menuScreen').style.display = 'flex';
-      document.getElementById('gameScreen').style.display = 'none';
+      event.stopPropagation(); // impede o clique de ir para nextCharacter
+      gameScreen.style.display = 'none';
+      menuScreen.style.display = 'flex';
+      currentTheme = '';
+      currentIndex = 0;
     }
   </script>
 </body>
