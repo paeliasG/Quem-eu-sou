@@ -1,0 +1,21 @@
+{
+  "name": "Quem Sou Eu - Eclesia",
+  "short_name": "Eclesia Quiz",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#ff4400",
+  "description": "Um quiz bíblico interativo e radical.",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "icon-512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ]
+}
