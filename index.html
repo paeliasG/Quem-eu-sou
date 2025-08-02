@@ -4,6 +4,25 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Quem Sou Eu Eclesia</title>
+  
+  <!-- Link para o manifest do PWA -->
+  <link rel="manifest" href="manifest.json" />
+
+  <!-- Registro do service worker -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', function() {
+        navigator.serviceWorker.register('service-worker.js')
+          .then(function(registration) {
+            console.log('Service Worker registrado com sucesso:', registration.scope);
+          })
+          .catch(function(error) {
+            console.log('Falha ao registrar Service Worker:', error);
+          });
+      });
+    }
+  </script>
+
   <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Roboto&display=swap" rel="stylesheet" />
   <style>
     :root {
@@ -113,7 +132,6 @@
       bottom: 1.5rem;
       user-select: none;
       transition: color 0.3s;
-      user-select: none;
     }
     #backButton:hover {
       color: #e64a19;
@@ -292,6 +310,8 @@
     }
 
     function showNextCharacter() {
+      if (!clickSound.paused) return; // evitar tocar som se ainda estiver tocando
+
       clickSound.currentTime = 0;
       clickSound.play();
 
@@ -306,7 +326,7 @@
     }
 
     function backToMenu(event) {
-      event.stopPropagation(); // impede o clique de ir para nextCharacter
+      event.stopPropagation(); // impedir clique ir para showNextCharacter
       gameScreen.style.display = 'none';
       menuScreen.style.display = 'flex';
       currentTheme = '';
