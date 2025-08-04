@@ -153,7 +153,7 @@
             margin-bottom: 4rem;
             word-wrap: break-word;
         }
-        #backButton, #restartButton {
+        #backButton {
             background: none;
             border: none;
             color: var(--laranja);
@@ -163,7 +163,7 @@
             bottom: 1.5rem;
             transition: color 0.3s;
         }
-        #backButton:hover, #restartButton:hover {
+        #backButton:hover {
             color: #e64a19;
             text-decoration: underline;
         }
@@ -233,12 +233,11 @@
     </div>
     <div id="endGameScreen">
         <div class="end-game-title">Tempo Esgotado!</div>
-        <button id="restartButton" onclick="playClickSound(); backToTimeSelection()">Jogar Novamente</button>
         <button id="backButton" onclick="playClickSound(); backToMenu(event)">← Voltar ao Menu</button>
     </div>
     <div class="footer">Feito por Jonas feat. Eclesia</div>
     <audio id="clickSound" src="https://actions.google.com/sounds/v1/cartoon/wood_plank_flicks.ogg"></audio>
-    <audio id="menuClickSound" src="https://www.soundjay.com/buttons/button-09a.mp3"></audio>
+    <audio id="menuClickSound" src="https://www.soundjay.com/buttons/button-09.mp3"></audio>
     <audio id="endGameSound" src="https://actions.google.com/sounds/v1/alarms/alarm_clock.ogg"></audio>
     <script>
         const characters = {
@@ -397,7 +396,19 @@
                 { name: "Lameque", desc: "Descendente de Caim, conhecido por sua violência." },
                 { name: "Nabote", desc: "Dono da vinha cobiçada por Acabe." },
                 { name: "Senaqueribe", desc: "Rei da Assíria, derrotado por Deus." },
-                { name: "Sofonias", desc: "Profeta que anunciou o julgamento de Judá." }
+                { name: "Sofonias", desc: "Profeta que anunciou o julgamento de Judá." },
+                { name: "Eliasar", desc: "Servo de Abraão, mencionado em Gênesis." },
+                { name: "Jael", desc: "Matou Sísera, aliada de Débora." },
+                { name: "Joquebede", desc: "Mãe de Moisés, escondeu-o do faraó." },
+                { name: "Baraque", desc: "Comandante militar, aliado de Débora." },
+                { name: "Jeú", desc: "Rei de Israel, destruiu a casa de Acabe." },
+                { name: "Naum", desc: "Profeta que anunciou a destruição de Nínive." },
+                { name: "Isabel", desc: "Mãe de João Batista, esposa de Zacarias." },
+                { name: "Zacarias (pai de João Batista)", desc: "Sacerdote, pai de João Batista." },
+                { name: "Simão de Cirene", desc: "Carregou a cruz de Jesus." },
+                { name: "Joana", desc: "Discípula de Jesus, esposa de Cuza." },
+                { name: "Damaris", desc: "Mulher convertida por Paulo em Atenas." },
+                { name: "Filemom", desc: "Cristão que recebeu a carta de Paulo." }
             ],
             antigo: [
                 { name: "Adão", desc: "Primeiro homem criado por Deus." },
@@ -474,7 +485,7 @@
                 { name: "Enoque", desc: "Homem que andou com Deus e foi arrebatado." },
                 { name: "Ezequias", desc: "Rei de Judá, buscou a Deus." },
                 { name: "Fineias", desc: "Sacerdote, neto de Arão." },
-                { name: "Gade", desc: "Filho de Jacó, fundador de uma tribo." },
+                { name: "Gade", desc: "Filho de Jacó, fundador de uma triba." },
                 { name: "Habacuque", desc: "Profeta que questionou Deus." },
                 { name: "Hagar", desc: "Serva de Sara, mãe de Ismael." },
                 { name: "Ismael", desc: "Filho de Abraão com Hagar." },
@@ -491,7 +502,7 @@
                 { name: "Melquisedeque", desc: "Rei e sacerdote que abençoou Abraão." },
                 { name: "Mesa", desc: "Rei de Moabe, mencionado em 2 Reis." },
                 { name: "Mical", desc: "Filha de Saul, esposa de Davi." },
-                { name: "Naftali", desc: "Filho de Jacó, fundador de uma tribo." },
+                { name: "Naftali", desc: "Filho de Jacó, fundador de uma triba." },
                 { name: "Natã", desc: "Profeta que confrontou Davi." },
                 { name: "Obadias", desc: "Profeta que anunciou julgamento a Edom." },
                 { name: "Onã", desc: "Filho de Judá, morreu por desobediência." },
@@ -508,7 +519,13 @@
                 { name: "Lameque", desc: "Descendente de Caim, conhecido por sua violência." },
                 { name: "Nabote", desc: "Dono da vinha cobiçada por Acabe." },
                 { name: "Senaqueribe", desc: "Rei da Assíria, derrotado por Deus." },
-                { name: "Sofonias", desc: "Profeta que anunciou o julgamento de Judá." }
+                { name: "Sofonias", desc: "Profeta que anunciou o julgamento de Judá." },
+                { name: "Eliasar", desc: "Servo de Abraão, mencionado em Gênesis." },
+                { name: "Jael", desc: "Matou Sísera, aliada de Débora." },
+                { name: "Joquebede", desc: "Mãe de Moisés, escondeu-o do faraó." },
+                { name: "Baraque", desc: "Comandante militar, aliado de Débora." },
+                { name: "Jeú", desc: "Rei de Israel, destruiu a casa de Acabe." },
+                { name: "Naum", desc: "Profeta que anunciou a destruição de Nínive." }
             ],
             novo: [
                 { name: "Jesus", desc: "Filho de Deus, Salvador da humanidade." },
@@ -556,7 +573,13 @@
                 { name: "Safira", desc: "Esposa de Ananias, morreu por mentir." },
                 { name: "Eunuco Etíope", desc: "Convertido por Felipe no caminho." },
                 { name: "Gamaliel", desc: "Fariseu que defendeu os apóstolos." },
-                { name: "Herodes Agripa", desc: "Rei que perseguiu os cristãos." }
+                { name: "Herodes Agripa", desc: "Rei que perseguiu os cristãos." },
+                { name: "Isabel", desc: "Mãe de João Batista, esposa de Zacarias." },
+                { name: "Zacarias (pai de João Batista)", desc: "Sacerdote, pai de João Batista." },
+                { name: "Simão de Cirene", desc: "Carregou a cruz de Jesus." },
+                { name: "Joana", desc: "Discípula de Jesus, esposa de Cuza." },
+                { name: "Damaris", desc: "Mulher convertida por Paulo em Atenas." },
+                { name: "Filemom", desc: "Cristão que recebeu a carta de Paulo." }
             ],
             discipulos: [
                 { name: "Pedro", desc: "Apóstolo, líder da Igreja primitiva." },
@@ -576,7 +599,8 @@
                 { name: "Timóteo", desc: "Discípulo de Paulo, pastor jovem." },
                 { name: "Tito", desc: "Discípulo de Paulo, líder na igreja." },
                 { name: "Lucas", desc: "Autor do Evangelho de Lucas e Atos." },
-                { name: "Marcos", desc: "Autor do Evangelho de Marcos." }
+                { name: "Marcos", desc: "Autor do Evangelho de Marcos." },
+                { name: "Filemom", desc: "Cristão que recebeu a carta de Paulo." }
             ],
             profetas: [
                 { name: "Samuel", desc: "Profeta e último juiz de Israel." },
@@ -597,7 +621,8 @@
                 { name: "Joel", desc: "Profeta que anunciou o dia do Senhor." },
                 { name: "Natã", desc: "Profeta que confrontou Davi." },
                 { name: "Obadias", desc: "Profeta que anunciou julgamento a Edom." },
-                { name: "Sofonias", desc: "Profeta que anunciou o julgamento de Judá." }
+                { name: "Sofonias", desc: "Profeta que anunciou o julgamento de Judá." },
+                { name: "Naum", desc: "Profeta que anunciou a destruição de Nínive." }
             ],
             mulheres: [
                 { name: "Eva", desc: "Primeira mulher, criada a partir de Adão." },
@@ -626,7 +651,12 @@
                 { name: "Raabe", desc: "Prostituta que ajudou os espiões em Jericó." },
                 { name: "Tamar", desc: "Nora de Judá, ancestral de Jesus." },
                 { name: "Zilpa", desc: "Serva de Lia, mãe de Gade e Aser." },
-                { name: "Safira", desc: "Esposa de Ananias, morreu por mentir." }
+                { name: "Safira", desc: "Esposa de Ananias, morreu por mentir." },
+                { name: "Jael", desc: "Matou Sísera, aliada de Débora." },
+                { name: "Joquebede", desc: "Mãe de Moisés, escondeu-o do faraó." },
+                { name: "Isabel", desc: "Mãe de João Batista, esposa de Zacarias." },
+                { name: "Joana", desc: "Discípula de Jesus, esposa de Cuza." },
+                { name: "Damaris", desc: "Mulher convertida por Paulo em Atenas." }
             ],
             reis: [
                 { name: "Saul", desc: "Primeiro rei de Israel." },
@@ -640,13 +670,15 @@
                 { name: "Josafá", desc: "Rei de Judá, aliado de Acabe." },
                 { name: "Mesa", desc: "Rei de Moabe, mencionado em 2 Reis." },
                 { name: "Roboão", desc: "Outro nome para Reoboão, rei de Judá." },
-                { name: "Senaqueribe", desc: "Rei da Assíria, derrotado por Deus." }
+                { name: "Senaqueribe", desc: "Rei da Assíria, derrotado por Deus." },
+                { name: "Jeú", desc: "Rei de Israel, destruiu a casa de Acabe." }
             ],
             juizes: [
                 { name: "Débora", desc: "Profetisa e juíza de Israel." },
                 { name: "Gideão", desc: "Juiz que derrotou os midianitas." },
                 { name: "Sansão", desc: "Juiz com força sobrenatural." },
-                { name: "Samuel", desc: "Profeta e último juiz de Israel." }
+                { name: "Samuel", desc: "Profeta e último juiz de Israel." },
+                { name: "Baraque", desc: "Comandante militar, aliado de Débora." }
             ]
         };
 
@@ -745,10 +777,6 @@
             if (!isSoundMuted) {
                 endGameSound.currentTime = 0;
                 endGameSound.play().catch(err => console.log('Erro ao tocar som de fim:', err));
-                setTimeout(() => {
-                    endGameSound.pause();
-                    endGameSound.currentTime = 0;
-                }, 3000);
             }
         }
 
@@ -768,12 +796,6 @@
             playClickSound();
             currentIndex = Math.floor(Math.random() * currentList.length);
             showCharacter();
-        }
-
-        function backToTimeSelection() {
-            endGameScreen.style.display = 'none';
-            timeSelectionScreen.style.display = 'flex';
-            playClickSound();
         }
 
         function backToMenu(event) {
