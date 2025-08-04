@@ -237,7 +237,7 @@
     </div>
     <div class="footer">Feito por Jonas feat. Eclesia</div>
     <audio id="clickSound" src="https://actions.google.com/sounds/v1/cartoon/wood_plank_flicks.ogg"></audio>
-    <audio id="menuClickSound" src="https://www.soundjay.com/buttons/button-16.mp3"></audio>
+    <audio id="menuClickSound" src="https://www.soundjay.com/buttons/button-09a.mp3"></audio>
     <audio id="endGameSound" src="https://actions.google.com/sounds/v1/alarms/alarm_clock.ogg"></audio>
     <script>
         const characters = {
@@ -357,7 +357,7 @@
                 { name: "Enoque", desc: "Homem que andou com Deus e foi arrebatado." },
                 { name: "Ezequias", desc: "Rei de Judá, buscou a Deus." },
                 { name: "Fineias", desc: "Sacerdote, neto de Arão." },
-                { name: "Gade", desc: "Filho de Jacó, fundador de uma triba." },
+                { name: "Gade", desc: "Filho de Jacó, fundador de uma tribo." },
                 { name: "Habacuque", desc: "Profeta que questionou Deus." },
                 { name: "Hagar", desc: "Serva de Sara, mãe de Ismael." },
                 { name: "Ismael", desc: "Filho de Abraão com Hagar." },
@@ -694,6 +694,19 @@
         const backButton = document.getElementById('backButton');
         const volumeButton = document.getElementById('volumeButton');
 
+        // Pré-carregar áudios
+        window.addEventListener('load', () => {
+            updateVolumeButton();
+            try {
+                menuClickSound.load();
+                clickSound.load();
+                endGameSound.load();
+                console.log('Áudios pré-carregados com sucesso');
+            } catch (err) {
+                console.error('Erro ao pré-carregar áudios:', err);
+            }
+        });
+
         function updateVolumeButton() {
             volumeButton.textContent = isSoundMuted ? '🔇' : '🔊';
         }
@@ -709,7 +722,9 @@
             if (!isSoundMuted) {
                 try {
                     clickSound.currentTime = 0;
-                    clickSound.play().catch(err => console.error('Erro ao tocar clickSound:', err));
+                    clickSound.play().then(() => {
+                        console.log('clickSound tocado com sucesso');
+                    }).catch(err => console.error('Erro ao tocar clickSound:', err));
                 } catch (err) {
                     console.error('Erro ao tentar tocar clickSound:', err);
                 }
@@ -720,7 +735,9 @@
             if (!isSoundMuted) {
                 try {
                     menuClickSound.currentTime = 0;
-                    menuClickSound.play().catch(err => console.error('Erro ao tocar menuClickSound:', err));
+                    menuClickSound.play().then(() => {
+                        console.log('menuClickSound tocado com sucesso');
+                    }).catch(err => console.error('Erro ao tocar menuClickSound:', err));
                 } catch (err) {
                     console.error('Erro ao tentar tocar menuClickSound:', err);
                 }
@@ -736,7 +753,7 @@
         }
 
         function selectTheme(theme) {
-            console.log('Tema selecionado:', theme); // Log para diagnóstico
+            console.log('Tema selecionado:', theme);
             playMenuClickSound();
             currentTheme = theme;
             menuScreen.style.display = 'none';
@@ -744,7 +761,7 @@
         }
 
         function startGameWithTheme(theme, minutes) {
-            console.log('Iniciando jogo com tema:', theme, 'e tempo:', minutes); // Log para diagnóstico
+            console.log('Iniciando jogo com tema:', theme, 'e tempo:', minutes);
             playMenuClickSound();
             currentTheme = theme;
             currentIndex = 0;
@@ -781,7 +798,9 @@
             if (!isSoundMuted) {
                 try {
                     endGameSound.currentTime = 0;
-                    endGameSound.play().catch(err => console.error('Erro ao tocar endGameSound:', err));
+                    endGameSound.play().then(() => {
+                        console.log('endGameSound tocado com sucesso');
+                    }).catch(err => console.error('Erro ao tocar endGameSound:', err));
                 } catch (err) {
                     console.error('Erro ao tentar tocar endGameSound:', err);
                 }
@@ -808,7 +827,7 @@
 
         function backToMenu(event) {
             event.stopPropagation();
-            console.log('Voltando ao menu'); // Log para diagnóstico
+            console.log('Voltando ao menu');
             playClickSound();
             clearInterval(timerInterval);
             gameScreen.style.display = 'none';
@@ -822,7 +841,6 @@
 
         document.getElementById('backToMenuFromTime').addEventListener('click', backToMenu);
         gameScreen.addEventListener('click', showNextCharacter);
-        window.addEventListener('load', updateVolumeButton);
     </script>
 </body>
 </html>
