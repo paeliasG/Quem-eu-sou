@@ -206,24 +206,24 @@
     <div id="menuScreen">
         <div class="menu-title">Quem Sou Eu Eclesia</div>
         <div class="themes-grid">
-            <button class="theme-button" onclick="playMenuClickSound(); showTimeSelection('todos')">Modo Completo</button>
-            <button class="theme-button" onclick="playMenuClickSound(); showTimeSelection('antigo')">Antigo Testamento</button>
-            <button class="theme-button" onclick="playMenuClickSound(); showTimeSelection('novo')">Novo Testamento</button>
-            <button class="theme-button" onclick="playMenuClickSound(); showTimeSelection('discipulos')">Discípulos</button>
-            <button class="theme-button" onclick="playMenuClickSound(); showTimeSelection('profetas')">Profetas</button>
-            <button class="theme-button" onclick="playMenuClickSound(); showTimeSelection('mulheres')">Mulheres</button>
-            <button class="theme-button" onclick="playMenuClickSound(); showTimeSelection('reis')">Reis de Israel</button>
-            <button class="theme-button" onclick="playMenuClickSound(); showTimeSelection('juizes')">Juízes</button>
+            <button class="theme-button" onclick="selectTheme('todos')">Modo Completo</button>
+            <button class="theme-button" onclick="selectTheme('antigo')">Antigo Testamento</button>
+            <button class="theme-button" onclick="selectTheme('novo')">Novo Testamento</button>
+            <button class="theme-button" onclick="selectTheme('discipulos')">Discípulos</button>
+            <button class="theme-button" onclick="selectTheme('profetas')">Profetas</button>
+            <button class="theme-button" onclick="selectTheme('mulheres')">Mulheres</button>
+            <button class="theme-button" onclick="selectTheme('reis')">Reis de Israel</button>
+            <button class="theme-button" onclick="selectTheme('juizes')">Juízes</button>
         </div>
         <button id="volumeButton" onclick="toggleSound()">🔊</button>
     </div>
     <div id="timeSelectionScreen">
         <div class="menu-title">Escolha o Tempo de Jogo</div>
-        <button class="time-button" onclick="playMenuClickSound(); startGame(currentTheme, 1)">1 Minuto</button>
-        <button class="time-button" onclick="playMenuClickSound(); startGame(currentTheme, 3)">3 Minutos</button>
-        <button class="time-button" onclick="playMenuClickSound(); startGame(currentTheme, 5)">5 Minutos</button>
-        <button class="time-button" onclick="playMenuClickSound(); startGame(currentTheme, 10)">10 Minutos</button>
-        <button id="backToMenuFromTime" class="time-button" style="background: none; color: var(--laranja);" onclick="playMenuClickSound(); backToMenu(event)">← Voltar</button>
+        <button class="time-button" onclick="startGameWithTheme(currentTheme, 1)">1 Minuto</button>
+        <button class="time-button" onclick="startGameWithTheme(currentTheme, 3)">3 Minutos</button>
+        <button class="time-button" onclick="startGameWithTheme(currentTheme, 5)">5 Minutos</button>
+        <button class="time-button" onclick="startGameWithTheme(currentTheme, 10)">10 Minutos</button>
+        <button id="backToMenuFromTime" class="time-button" style="background: none; color: var(--laranja);" onclick="backToMenu(event)">← Voltar</button>
     </div>
     <div id="gameScreen">
         <div id="timer">00:00</div>
@@ -237,7 +237,7 @@
     </div>
     <div class="footer">Feito por Jonas feat. Eclesia</div>
     <audio id="clickSound" src="https://actions.google.com/sounds/v1/cartoon/wood_plank_flicks.ogg"></audio>
-    <audio id="menuClickSound" src="https://www.soundjay.com/buttons/button-09a.mp3"></audio>
+    <audio id="menuClickSound" src="https://www.soundjay.com/buttons/button-16.mp3"></audio>
     <audio id="endGameSound" src="https://actions.google.com/sounds/v1/alarms/alarm_clock.ogg"></audio>
     <script>
         const characters = {
@@ -357,7 +357,7 @@
                 { name: "Enoque", desc: "Homem que andou com Deus e foi arrebatado." },
                 { name: "Ezequias", desc: "Rei de Judá, buscou a Deus." },
                 { name: "Fineias", desc: "Sacerdote, neto de Arão." },
-                { name: "Gade", desc: "Filho de Jacó, fundador de uma tribo." },
+                { name: "Gade", desc: "Filho de Jacó, fundador de uma triba." },
                 { name: "Habacuque", desc: "Profeta que questionou Deus." },
                 { name: "Hagar", desc: "Serva de Sara, mãe de Ismael." },
                 { name: "Ismael", desc: "Filho de Abraão com Hagar." },
@@ -392,9 +392,7 @@
                 { name: "Safira", desc: "Esposa de Ananias, morreu por mentir." },
                 { name: "Eunuco Etíope", desc: "Convertido por Felipe no caminho." },
                 { name: "Gamaliel", desc: "Fariseu que defendeu os apóstolos." },
-                { name: "Herodes Agri十八
-
-System: Agripa", desc: "Rei que perseguiu os cristãos." },
+                { name: "Herodes Agripa", desc: "Rei que perseguiu os cristãos." },
                 { name: "Eliasar", desc: "Servo de Abraão, mencionado em Gênesis." },
                 { name: "Jael", desc: "Matou Sísera, aliada de Débora." },
                 { name: "Joquebede", desc: "Mãe de Moisés, escondeu-o do faraó." },
@@ -514,10 +512,6 @@ System: Agripa", desc: "Rei que perseguiu os cristãos." },
                 { name: "Zebulom", desc: "Filho de Jacó, fundador de uma tribo." },
                 { name: "Zilpa", desc: "Serva de Lia, mãe de Gade e Aser." },
                 { name: "Aser", desc: "Filho de Jacó, fundador de uma tribo." },
-                { name: "Lameque", desc: "Descendente de Caim, conhecido por sua violência." },
-                { name: "Nabote", desc: "Dono da vinha cobiçada por Acabe." },
-                { name: "Senaqueribe", desc: "Rei da Assíria, derrotado por Deus." },
-                { name: "Sofonias", desc: "Profeta que anunciou o julgamento de Judá." },
                 { name: "Eliasar", desc: "Servo de Abraão, mencionado em Gênesis." },
                 { name: "Jael", desc: "Matou Sísera, aliada de Débora." },
                 { name: "Joquebede", desc: "Mãe de Moisés, escondeu-o do faraó." },
@@ -713,15 +707,23 @@ System: Agripa", desc: "Rei que perseguiu os cristãos." },
 
         function playClickSound() {
             if (!isSoundMuted) {
-                clickSound.currentTime = 0;
-                clickSound.play().catch(err => console.log('Erro ao tocar som:', err));
+                try {
+                    clickSound.currentTime = 0;
+                    clickSound.play().catch(err => console.error('Erro ao tocar clickSound:', err));
+                } catch (err) {
+                    console.error('Erro ao tentar tocar clickSound:', err);
+                }
             }
         }
 
         function playMenuClickSound() {
             if (!isSoundMuted) {
-                menuClickSound.currentTime = 0;
-                menuClickSound.play().catch(err => console.log('Erro ao tocar som de menu:', err));
+                try {
+                    menuClickSound.currentTime = 0;
+                    menuClickSound.play().catch(err => console.error('Erro ao tocar menuClickSound:', err));
+                } catch (err) {
+                    console.error('Erro ao tentar tocar menuClickSound:', err);
+                }
             }
         }
 
@@ -733,13 +735,17 @@ System: Agripa", desc: "Rei que perseguiu os cristãos." },
             return array;
         }
 
-        function showTimeSelection(theme) {
+        function selectTheme(theme) {
+            console.log('Tema selecionado:', theme); // Log para diagnóstico
+            playMenuClickSound();
             currentTheme = theme;
             menuScreen.style.display = 'none';
             timeSelectionScreen.style.display = 'flex';
         }
 
-        function startGame(theme, minutes) {
+        function startGameWithTheme(theme, minutes) {
+            console.log('Iniciando jogo com tema:', theme, 'e tempo:', minutes); // Log para diagnóstico
+            playMenuClickSound();
             currentTheme = theme;
             currentIndex = 0;
             currentList = shuffle([...characters[theme]]);
@@ -773,8 +779,12 @@ System: Agripa", desc: "Rei que perseguiu os cristãos." },
             gameScreen.style.display = 'none';
             endGameScreen.style.display = 'flex';
             if (!isSoundMuted) {
-                endGameSound.currentTime = 0;
-                endGameSound.play().catch(err => console.log('Erro ao tocar som de fim:', err));
+                try {
+                    endGameSound.currentTime = 0;
+                    endGameSound.play().catch(err => console.error('Erro ao tocar endGameSound:', err));
+                } catch (err) {
+                    console.error('Erro ao tentar tocar endGameSound:', err);
+                }
             }
         }
 
@@ -798,6 +808,8 @@ System: Agripa", desc: "Rei que perseguiu os cristãos." },
 
         function backToMenu(event) {
             event.stopPropagation();
+            console.log('Voltando ao menu'); // Log para diagnóstico
+            playClickSound();
             clearInterval(timerInterval);
             gameScreen.style.display = 'none';
             endGameScreen.style.display = 'none';
