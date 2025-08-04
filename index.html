@@ -48,7 +48,6 @@
             box-sizing: border-box;
             gap: 1.5rem;
         }
-        conversa com a Grok
         .menu-title {
             font-family: 'Bangers', cursive;
             font-size: 4rem;
@@ -178,6 +177,20 @@
             padding: 0.5rem 1rem;
             border-radius: 10px;
         }
+        #volumeButton {
+            position: fixed;
+            bottom: 1.5rem;
+            right: 1.5rem;
+            background: none;
+            border: none;
+            color: var(--laranja);
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+        #volumeButton:hover {
+            color: #e64a19;
+        }
         .footer {
             position: fixed;
             bottom: 0.3rem;
@@ -193,23 +206,24 @@
     <div id="menuScreen">
         <div class="menu-title">Quem Sou Eu Eclesia</div>
         <div class="themes-grid">
-            <button class="theme-button" onclick="playClickSound(); showTimeSelection('todos')">Modo Completo</button>
-            <button class="theme-button" onclick="playClickSound(); showTimeSelection('antigo')">Antigo Testamento</button>
-            <button class="theme-button" onclick="playClickSound(); showTimeSelection('novo')">Novo Testamento</button>
-            <button class="theme-button" onclick="playClickSound(); showTimeSelection('discipulos')">Discípulos</button>
-            <button class="theme-button" onclick="playClickSound(); showTimeSelection('profetas')">Profetas</button>
-            <button class="theme-button" onclick="playClickSound(); showTimeSelection('mulheres')">Mulheres</button>
-            <button class="theme-button" onclick="playClickSound(); showTimeSelection('reis')">Reis de Israel</button>
-            <button class="theme-button" onclick="playClickSound(); showTimeSelection('juizes')">Juízes</button>
+            <button class="theme-button" onclick="playMenuClickSound(); showTimeSelection('todos')">Modo Completo</button>
+            <button class="theme-button" onclick="playMenuClickSound(); showTimeSelection('antigo')">Antigo Testamento</button>
+            <button class="theme-button" onclick="playMenuClickSound(); showTimeSelection('novo')">Novo Testamento</button>
+            <button class="theme-button" onclick="playMenuClickSound(); showTimeSelection('discipulos')">Discípulos</button>
+            <button class="theme-button" onclick="playMenuClickSound(); showTimeSelection('profetas')">Profetas</button>
+            <button class="theme-button" onclick="playMenuClickSound(); showTimeSelection('mulheres')">Mulheres</button>
+            <button class="theme-button" onclick="playMenuClickSound(); showTimeSelection('reis')">Reis de Israel</button>
+            <button class="theme-button" onclick="playMenuClickSound(); showTimeSelection('juizes')">Juízes</button>
         </div>
+        <button id="volumeButton" onclick="toggleSound()">🔊</button>
     </div>
     <div id="timeSelectionScreen">
         <div class="menu-title">Escolha o Tempo de Jogo</div>
-        <button class="time-button" onclick="playClickSound(); startGame(currentTheme, 1)">1 Minuto</button>
-        <button class="time-button" onclick="playClickSound(); startGame(currentTheme, 3)">3 Minutos</button>
-        <button class="time-button" onclick="playClickSound(); startGame(currentTheme, 5)">5 Minutos</button>
-        <button class="time-button" onclick="playClickSound(); startGame(currentTheme, 10)">10 Minutos</button>
-        <button id="backToMenuFromTime" class="time-button" style="background: none; color: var(--laranja);" onclick="playClickSound(); backToMenu(event)">← Voltar</button>
+        <button class="time-button" onclick="playMenuClickSound(); startGame(currentTheme, 1)">1 Minuto</button>
+        <button class="time-button" onclick="playMenuClickSound(); startGame(currentTheme, 3)">3 Minutos</button>
+        <button class="time-button" onclick="playMenuClickSound(); startGame(currentTheme, 5)">5 Minutos</button>
+        <button class="time-button" onclick="playMenuClickSound(); startGame(currentTheme, 10)">10 Minutos</button>
+        <button id="backToMenuFromTime" class="time-button" style="background: none; color: var(--laranja);" onclick="playMenuClickSound(); backToMenu(event)">← Voltar</button>
     </div>
     <div id="gameScreen">
         <div id="timer">00:00</div>
@@ -223,6 +237,7 @@
     </div>
     <div class="footer">Feito por Jonas feat. Eclesia</div>
     <audio id="clickSound" src="https://actions.google.com/sounds/v1/cartoon/wood_plank_flicks.ogg"></audio>
+    <audio id="menuClickSound" src="https://actions.google.com/sounds/v1/cartoon/click_02.ogg"></audio>
     <audio id="endGameSound" src="https://actions.google.com/sounds/v1/alarms/alarm_clock.ogg"></audio>
     <script>
         const characters = {
@@ -639,6 +654,7 @@
         let currentIndex = 0;
         let timerInterval;
         let timeLeft;
+        let isSoundMuted = localStorage.getItem('soundMuted') === 'true';
 
         const menuScreen = document.getElementById('menuScreen');
         const timeSelectionScreen = document.getElementById('timeSelectionScreen');
@@ -648,12 +664,34 @@
         const characterDesc = document.getElementById('characterDesc');
         const timerDisplay = document.getElementById('timer');
         const clickSound = document.getElementById('clickSound');
+        const menuClickSound = document.getElementById('menuClickSound');
         const endGameSound = document.getElementById('endGameSound');
         const backButton = document.getElementById('backButton');
+        const volumeButton = document.getElementById('volumeButton');
+
+        function updateVolumeButton() {
+            volumeButton.textContent = isSoundMuted ? '🔇' : '🔊';
+        }
+
+        function toggleSound() {
+            isSoundMuted = !isSoundMuted;
+            localStorage.setItem('soundMuted', isSoundMuted);
+            updateVolumeButton();
+            playMenuClickSound();
+        }
 
         function playClickSound() {
-            clickSound.currentTime = 0;
-            clickSound.play().catch(err => console.log('Erro ao tocar som:', err));
+            if (!isSoundMuted) {
+                clickSound.currentTime = 0;
+                clickSound.play().catch(err => console.log('Erro ao tocar som:', err));
+            }
+        }
+
+        function playMenuClickSound() {
+            if (!isSoundMuted) {
+                menuClickSound.currentTime = 0;
+                menuClickSound.play().catch(err => console.log('Erro ao tocar som de menu:', err));
+            }
         }
 
         function shuffle(array) {
@@ -703,12 +741,14 @@
         function endGame() {
             gameScreen.style.display = 'none';
             endGameScreen.style.display = 'flex';
-            endGameSound.currentTime = 0;
-            endGameSound.play().catch(err => console.log('Erro ao tocar som de fim:', err));
-            setTimeout(() => {
-                endGameSound.pause();
+            if (!isSoundMuted) {
                 endGameSound.currentTime = 0;
-            }, 3000);
+                endGameSound.play().catch(err => console.log('Erro ao tocar som de fim:', err));
+                setTimeout(() => {
+                    endGameSound.pause();
+                    endGameSound.currentTime = 0;
+                }, 3000);
+            }
         }
 
         function showCharacter() {
@@ -743,6 +783,7 @@
 
         document.getElementById('backToMenuFromTime').addEventListener('click', backToMenu);
         gameScreen.addEventListener('click', showNextCharacter);
+        window.addEventListener('load', updateVolumeButton);
     </script>
 </body>
 </html>
