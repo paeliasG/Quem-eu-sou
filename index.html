@@ -238,7 +238,7 @@
     </div>
     <div class="footer">Feito por Jonas feat. Eclesia</div>
     <audio id="clickSound" src="https://actions.google.com/sounds/v1/cartoon/wood_plank_flicks.ogg"></audio>
-    <audio id="menuClickSound" src="https://www.soundjay.com/buttons/button-09.mp3"></audio>
+    <audio id="menuClickSound" src="https://www.soundjay.com/buttons/button-09a.mp3"></audio>
     <audio id="endGameSound" src="https://actions.google.com/sounds/v1/alarms/alarm_clock.ogg"></audio>
     <script>
         const characters = {
@@ -487,7 +487,7 @@
                 { name: "Labão", desc: "Pai de Raquel e Lia, enganou Jacó." },
                 { name: "Levi", desc: "Filho de Jacó, ancestral dos levitas." },
                 { name: "Ló", desc: "Sobrinho de Abraão, escapou de Sodoma." },
-                { name: "Manassés", desc: "Filho de José, líder de uma triba." },
+                { name: "Manassés", desc: "Filho de José, líder de uma tribo." },
                 { name: "Melquisedeque", desc: "Rei e sacerdote que abençoou Abraão." },
                 { name: "Mesa", desc: "Rei de Moabe, mencionado em 2 Reis." },
                 { name: "Mical", desc: "Filha de Saul, esposa de Davi." },
@@ -745,6 +745,10 @@
             if (!isSoundMuted) {
                 endGameSound.currentTime = 0;
                 endGameSound.play().catch(err => console.log('Erro ao tocar som de fim:', err));
+                setTimeout(() => {
+                    endGameSound.pause();
+                    endGameSound.currentTime = 0;
+                }, 3000);
             }
         }
 
@@ -769,6 +773,7 @@
         function backToTimeSelection() {
             endGameScreen.style.display = 'none';
             timeSelectionScreen.style.display = 'flex';
+            playClickSound();
         }
 
         function backToMenu(event) {
