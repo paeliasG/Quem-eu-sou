@@ -177,6 +177,21 @@
             padding: 0.5rem 1rem;
             border-radius: 10px;
         }
+        #score {
+            position: fixed;
+            top: 1rem;
+            left: 1rem;
+            font-size: 1.2rem;
+            color: var(--laranja);
+            background-color: rgba(0,0,0,0.7);
+            padding: 0.5rem 1rem;
+            border-radius: 10px;
+        }
+        #finalScore {
+            font-size: 1.5rem;
+            color: var(--cinza-claro);
+            margin-bottom: 1rem;
+        }
         #volumeButton {
             position: fixed;
             bottom: 1.5rem;
@@ -227,12 +242,14 @@
     </div>
     <div id="gameScreen">
         <div id="timer">00:00</div>
+        <div id="score">Acertos: 0</div>
         <div class="character-name" id="characterName"></div>
         <div class="character-desc" id="characterDesc"></div>
         <button id="backButton" onclick="playClickSound(); backToMenu(event)">← Voltar ao Menu</button>
     </div>
     <div id="endGameScreen">
         <div class="end-game-title">Tempo Esgotado!</div>
+        <div id="finalScore">Acertos: 0</div>
         <button id="backButton" onclick="playClickSound(); backToMenu(event)">← Voltar ao Menu</button>
     </div>
     <div class="footer">Feito por Jonas feat. Eclesia</div>
@@ -680,6 +697,7 @@
         let timerInterval;
         let timeLeft;
         let isSoundMuted = localStorage.getItem('soundMuted') === 'true';
+        let correctGuesses = 0;
 
         const menuScreen = document.getElementById('menuScreen');
         const timeSelectionScreen = document.getElementById('timeSelectionScreen');
@@ -688,13 +706,14 @@
         const characterName = document.getElementById('characterName');
         const characterDesc = document.getElementById('characterDesc');
         const timerDisplay = document.getElementById('timer');
+        const scoreDisplay = document.getElementById('score');
+        const finalScoreDisplay = document.getElementById('finalScore');
         const clickSound = document.getElementById('clickSound');
         const menuClickSound = document.getElementById('menuClickSound');
         const endGameSound = document.getElementById('endGameSound');
         const backButton = document.getElementById('backButton');
         const volumeButton = document.getElementById('volumeButton');
 
-        // Pré-carregar áudios
         window.addEventListener('load', () => {
             updateVolumeButton();
             try {
@@ -766,6 +785,8 @@
             currentTheme = theme;
             currentIndex = 0;
             currentList = shuffle([...characters[theme]]);
+            correctGuesses = 0;
+            updateScoreDisplay();
             timeSelectionScreen.style.display = 'none';
             gameScreen.style.display = 'flex';
             timeLeft = minutes * 60;
@@ -792,9 +813,15 @@
             timerDisplay.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
         }
 
+        function updateScoreDisplay() {
+            scoreDisplay.textContent = `Acertos: ${correctGuesses}`;
+            finalScoreDisplay.textContent = `Acertos: ${correctGuesses}`;
+        }
+
         function endGame() {
             gameScreen.style.display = 'none';
             endGameScreen.style.display = 'flex';
+            updateScoreDisplay();
             if (!isSoundMuted) {
                 try {
                     endGameSound.currentTime = 0;
@@ -821,6 +848,8 @@
         function showNextCharacter(event) {
             if (event.target === backButton) return;
             playClickSound();
+            correctGuesses++;
+            updateScoreDisplay();
             currentIndex = Math.floor(Math.random() * currentList.length);
             showCharacter();
         }
@@ -837,6 +866,8 @@
             currentTheme = '';
             currentList = [];
             currentIndex = 0;
+            correctGuesses = 0;
+            updateScoreDisplay();
         }
 
         document.getElementById('backToMenuFromTime').addEventListener('click', backToMenu);
